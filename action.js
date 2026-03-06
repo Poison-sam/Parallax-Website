@@ -1,7 +1,7 @@
 // Select the class bubble
 time = document.getElementsByClassName('bubbles')[0];
 
-// padding values for desktop
+// scroll offset values for desktop
 var fish2move = 100;
 var fish3move = 900;
 var fish4move = 1200;
@@ -18,7 +18,11 @@ if (screen.width < 400) {
     fish4move = 4300;
 }
 
-
+// Cache each fish's initial top position so scrolling only moves them vertically
+var fish1Top = parseFloat(getComputedStyle(fish1).top);
+var fish2Top = parseFloat(getComputedStyle(fish2).top);
+var fish3Top = parseFloat(getComputedStyle(fish3).top);
+var fish4Top = parseFloat(getComputedStyle(fish4).top);
 
 window.addEventListener('scroll', function () {
 
@@ -49,11 +53,11 @@ window.addEventListener('scroll', function () {
         splash.style.top = 20 + value * -0.3 + 'px';
     }
 
-    //Move fishes horizontally
-    fish1.style.right = (value - 100) * 1 + 'px';
-    fish2.style.left = (value - fish2move) * 1 + 'px';
-    fish3.style.right = (value - fish3move) * 1 + 'px';
-    fish4.style.left = (value - fish4move) * 1 + 'px';
+    //Move fishes vertically (top only, no horizontal movement)
+    fish1.style.top = fish1Top + (value - 100) * 0.4 + 'px';
+    fish2.style.top = fish2Top + (value - fish2move) * -0.35 + 'px';
+    fish3.style.top = fish3Top + (value - fish3move) * 0.3 + 'px';
+    fish4.style.top = fish4Top + (value - fish4move) * -0.25 + 'px';
 })
 
 
